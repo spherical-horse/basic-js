@@ -11,10 +11,11 @@ const chainMaker = {
     },
     removeLink(position) {
         if (typeof(position) !== 'number') {
-            links = [];
+            this.links = [];
             throw new Error();
         }
         if (position - 1 < 0 && position - 1 >= this.links.length) {
+            this.links = [];
             throw new Error();
         }
         this.links.splice(position - 1, 1);
@@ -27,12 +28,13 @@ const chainMaker = {
     finishChain() {
         const links = this.links;
         this.links = [];
+        console.log(links);
         return `( ${links.join(' )~~( ')} )`;
     }
 };
 
 module.exports = chainMaker;
-
+// chainMaker.addLink(1).addLink(2).addLink(3).removeLink(4);
 // console.log(chainMaker.addLink(1).addLink(2).addLink(3).removeLink(1).reverseChain().finishChain());
 // console.log(chainMaker.addLink(function() {}).addLink('2nd').addLink('3rd').removeLink(2).reverseChain().finishChain());
 // console.log(chainMaker.addLink(1).addLink(2).addLink(3).removeLink(0));
